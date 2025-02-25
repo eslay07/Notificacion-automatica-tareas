@@ -112,7 +112,6 @@ Para garantizar el correcto funcionamiento del sistema, se recomienda:
 ✅ **Reducción de Errores Humanos:** Se evitan olvidos en el seguimiento de pedidos.  
 ✅ **Mejor Gestión del Tiempo:** El equipo se enfoca en tareas más productivas en lugar de realizar seguimiento manual.  
 ✅ **Escalabilidad:** Se puede adaptar fácilmente para nuevos procesos o requerimientos.  
-
 ---
 
 ## 📜 Licencia y Uso del Proyecto  
