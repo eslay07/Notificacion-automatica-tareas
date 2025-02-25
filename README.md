@@ -1,6 +1,14 @@
 # 📌 Sistema de Notificación Automática de Tareas en Google Sheets
 
-Este repositorio contiene un sistema desarrollado en **Google Apps Script** que permite la **automatización del seguimiento de tareas en Google Sheets**. Su objetivo es mejorar la gestión de pedidos y procesos administrativos al detectar automáticamente cuándo una tarea ha sido completada y enviar una **notificación por correo electrónico** a los responsables.
+Este repositorio contiene un sistema desarrollado en Google Apps Script que permite la automatización del seguimiento de solicitudes de compra en Google Sheets.
+
+📌 ¿Cómo funciona?
+
+Cada tarea representa una solicitud de compra que incluye varios ítems con sus respectivas cantidades.
+El sistema revisa automáticamente si todos los ítems de una tarea han sido entregados en su totalidad.
+Si una tarea ha sido completada, se envía una notificación por correo electrónico al responsable de la hoja.
+Se actualiza la hoja de cálculo marcando la tarea como "NOTIFICADO" para evitar duplicaciones en las alertas.
+Este sistema reduce la supervisión manual y optimiza la gestión de pedidos, asegurando que cada solicitud de compra se procese correctamente
 
 ---
 
@@ -31,7 +39,7 @@ Para facilitar la implementación del sistema, el repositorio contiene los sigui
 
 ## 📊 Estructura de la Hoja de Cálculo
 
-El sistema requiere que la hoja de cálculo siga la siguiente estructura para su correcto funcionamiento:
+Cada tarea en la hoja de cálculo representa una solicitud de compra que contiene varios ítems con diferentes cantidades. Para que el sistema funcione correctamente, la hoja debe seguir la siguiente estructura:
 
 | **Columna** | **Descripción** |
 |------------|----------------|
