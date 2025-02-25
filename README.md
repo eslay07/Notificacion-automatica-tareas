@@ -33,7 +33,8 @@ Para facilitar la implementación del sistema, el repositorio contiene los sigui
 | `Formato_Hoja_Calculo.xlsx` | Plantilla en Excel con el formato correcto de la hoja de cálculo. |
 
 📌 **También está disponible una plantilla en Google Sheets:**  
-📊 **[Formato de la Hoja de Cálculo en Google Drive]([https://docs.google.com/spreadsheets/d/TU_ENLACE_AQUI](https://docs.google.com/spreadsheets/d/1sAPchIsvMR5bm6y94OuizyQOx0g0g12UvcDKRgOqaGY/edit?usp=sharing))**  
+📊 **[Formato de la Hoja de Cálculo en Google Drive](https://docs.google.com/spreadsheets/d/1sAPchIsvMR5bm6y94OuizyQOx0g0g12UvcDKRgOqaGY/edit?usp=sharing)**
+
 
 ---
 
