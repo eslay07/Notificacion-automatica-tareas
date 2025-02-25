@@ -16,8 +16,8 @@ Este sistema reduce la supervisión manual y optimiza la gestión de pedidos, as
 
 Para garantizar una correcta implementación y uso del sistema, se incluyen los siguientes documentos:
 
-- 📘 **[Guía Técnica de Funcionamiento v1](Manual_Tecnico_v1.pdf)**
-- 📙 **[Manual de Usuario v1](Manual_Usuario_v1.pdf)**
+- 📘 **Guía de Uso - Notificación Automática de Tareas Completadas (Versión 1.0).docx**
+- 📙 **Guía de Uso - Notificación Automática de Tareas Completadas (Versión 1.0).docx**
 
 ---
 
@@ -27,9 +27,9 @@ Para facilitar la implementación del sistema, el repositorio contiene los sigui
 
 | **Archivo** | **Descripción** |
 |------------|----------------|
-| `script.gs` | Código fuente del sistema en Google Apps Script. |
-| `Manual_Tecnico_v1.pdf` | Documentación técnica para desarrolladores y administradores. |
-| `Manual_Usuario_v1.pdf` | Guía para los usuarios finales del sistema. |
+| `Tareas_finalizadas.gs` | Código fuente del sistema en Google Apps Script. |
+| `Guía Técnica de Funcionamiento -Automatización de Notificaciones en Google Sheets Telconet. (v1).docx` | Documentación técnica para desarrolladores y administradores. |
+| `Guía de Uso - Notificación Automática de Tareas Completadas (Versión 1.0).docx` | Guía para los usuarios finales del sistema. |
 | `Formato_Hoja_Calculo.xlsx` | Plantilla en Excel con el formato correcto de la hoja de cálculo. |
 
 📌 **También está disponible una plantilla en Google Sheets:**  
@@ -66,7 +66,7 @@ Cada tarea en la hoja de cálculo representa una solicitud de compra que contien
 ### 📌 **1️⃣ Copiar el Código en Google Apps Script**
 1. Abrir la hoja de cálculo en **Google Sheets**.  
 2. Ir a **Extensiones > Apps Script**.  
-3. Eliminar cualquier código existente y pegar el contenido de `script.gs`.  
+3. Eliminar cualquier código existente y pegar el contenido de `Tareas_finalizadas.gs`.  
 4. Guardar los cambios.  
 
 ### 📌 **2️⃣ Configurar el Activador para la Ejecución Automática**
