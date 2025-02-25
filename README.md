@@ -16,7 +16,7 @@ Este sistema reduce la supervisión manual y optimiza la gestión de pedidos, as
 
 Para garantizar una correcta implementación y uso del sistema, se incluyen los siguientes documentos:
 
-- 📘 **Guía de Uso - Notificación Automática de Tareas Completadas (Versión 1.0).docx**
+- 📘 **Guía Técnica de Funcionamiento -Automatización de Notificaciones en Google Sheets Telconet. (v1).docx**
 - 📙 **Guía de Uso - Notificación Automática de Tareas Completadas (Versión 1.0).docx**
 
 ---
