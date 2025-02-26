@@ -116,20 +116,17 @@ Para garantizar el correcto funcionamiento del sistema, se recomienda:
 
 ## 📜 Licencia y Uso del Proyecto  
 
-Este sistema ha sido desarrollado como una **versión preliminar** de una herramienta para la automatización de notificaciones en Google Sheets.  
+Este sistema fue desarrollado como un proyecto independiente para la automatización de notificaciones en Google Sheets.
 
-📌 **Desarrollador Original:** Jimmy Toapanta  
-📌 **Estado del Proyecto:** En fase de pruebas y optimización  
+📌 Desarrollador Original: Jimmy Toapanta
+📌 Estado del Proyecto: Proyecto experimental, sin relación con implementaciones empresariales actuales
 
-### **Condiciones de Uso:**  
-- Este código ha sido desarrollado con fines de optimización en la gestión de tareas.  
-- Se encuentra en una versión inicial y está sujeto a mejoras antes de su implementación final.  
-- Su uso, modificación o distribución deben ser autorizados antes de su integración en entornos empresariales.  
-
-### **Importante:**  
-Este código aún no ha sido formalmente entregado ni implementado como un sistema oficial de la empresa Telconet.  
-
-El desarrollador original **Jimmy Toapanta** mantiene la autoría de esta versión hasta su entrega oficial.  
+Condiciones de Uso
+Este código fue desarrollado con fines de exploración y pruebas en automatización.
+Se encuentra en una versión preliminar sin implementaciones oficiales en ninguna empresa.
+Su uso, modificación o distribución deben ser autorizados por el autor.
+Importante
+Esta versión del código no corresponde a ninguna implementación oficial de Telconet ni de ninguna otra empresa. Fue creada únicamente con fines de exploración y aprendizaje.
 
 ---
 
