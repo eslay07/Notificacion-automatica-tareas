@@ -1,109 +1,72 @@
-# Sistema de Notificación Automática de Tareas en Google Sheets
+# Notificación automática de tareas en Google Sheets
 
-Este repositorio contiene un sistema desarrollado en Google Apps Script que automatiza el seguimiento de solicitudes de compra registradas en Google Sheets. Se apoya en una hoja de cálculo con un formato específico y en un disparador temporal que revisa periódicamente las tareas.
+**Automatización con Google Apps Script que detecta entregas completas y avisa por correo para continuar el seguimiento de la tarea.** Es un proyecto personal de Jimmy Toapanta orientado a reducir revisiones repetitivas de una hoja operativa.
 
-## Descripción general
+[Lectura de portafolio y evidencia](PORTFOLIO.md) · [GestorCompras](https://github.com/eslay07/GestorCompras) · [Perfil del autor](https://github.com/eslay07)
 
-- Cada tarea corresponde a una solicitud de compra con varios ítems y sus cantidades.
-- El script verifica si todos los ítems de la tarea fueron entregados por completo.
-- Al detectar una tarea completada, envía un correo electrónico al responsable de la hoja y marca la fila con "NOTIFICADO" para evitar duplicados.
+## Qué hace y con qué tecnología
 
----
+La implementación usa **JavaScript en Google Apps Script**, `SpreadsheetApp` y `MailApp`. No utiliza Python ni lee Outlook.
 
-## Contenido del repositorio
+1. Recorre las hojas incluidas en el mapa de destinatarios.
+2. Localiza bloques entre `PENDIENTE ENTREGA` y `DELIMITADOR` en la columna D.
+3. Busca hacia arriba el número de tarea de nueve dígitos en la columna B.
+4. Revisa los pendientes del bloque y omite una tarea cuya columna H ya contiene `NOTIFICADO`.
+5. Envía un resumen por hoja mediante correo.
+6. Después del envío correcto, marca las tareas como `NOTIFICADO`.
 
-| Archivo | Descripción |
-|---------|-------------|
-| `Tareas_finalizadas.gs` | Código fuente del sistema en Google Apps Script. |
-| `Guía Técnica de Funcionamiento -Automatización de Notificaciones en Google Sheets Telconet. (v1).docx` | Referencia técnica para configuración y mantenimiento. |
-| `Guía de Uso - Notificación Automática de Tareas Completadas (Versión 1.0).docx` | Instrucciones de uso para los responsables de la hoja. |
-| `Formato_Hoja_Calculo.xlsx` | Plantilla en Excel con el formato de la hoja de cálculo. |
+```mermaid
+flowchart LR
+    A[Hoja configurada] --> B[Evaluar pendientes del bloque]
+    B --> C[Preparar tareas completas sin notificar]
+    C --> D[Enviar resumen al responsable]
+    D --> E[Registrar NOTIFICADO]
+```
 
-También está disponible una plantilla en Google Sheets:
+## Estructura de entrada esperada
 
-[Formato de la Hoja de Cálculo en Google Drive](https://docs.google.com/spreadsheets/d/ID_DE_EJEMPLO/edit?usp=sharing)
+| Elemento | Ubicación leída por el código |
+| --- | --- |
+| Número de tarea | Columna B, en una fila anterior al bloque; nueve dígitos |
+| Inicio y final del bloque | Columna D: PENDIENTE ENTREGA y DELIMITADOR |
+| Cantidad pendiente de cada línea | Columna D, entre los delimitadores |
+| Estado de aviso | Columna H de la fila de la tarea |
+| Destinatario | Mapa `emailPorHoja`, según nombre de la hoja |
 
----
+Las columnas adicionales pueden usarse en la hoja, pero estas posiciones son las que consume esta versión del script.
 
-## Estructura de la hoja de cálculo
+## Configuración y prueba
 
-La hoja agrupa las tareas entre las palabras clave `"PENDIENTE ENTREGA"` (inicio) y `"DELIMITADOR"` (final). Dentro de ese rango, las columnas deben seguir el siguiente esquema:
+1. Cree una copia de prueba de su hoja con datos sintéticos y la estructura anterior.
+2. Abra **Extensiones → Apps Script** y copie [Tareas_finalizadas.gs](Tareas_finalizadas.gs).
+3. Ajuste `emailPorHoja` con los nombres de sus hojas y un destinatario de prueba propio. No publique direcciones reales en GitHub.
+4. Ejecute `verificarTareasCompletas` y revise los permisos solicitados por Google antes de concederlos.
+5. Compruebe que una tarea pendiente no se notifica, una completa se notifica y queda marcada, y una segunda ejecución no vuelve a enviar la ya marcada.
+6. Cuando haya validado el comportamiento, configure un activador temporal con la frecuencia adecuada a su operación y a las cuotas disponibles de su cuenta.
 
-| Columna | Descripción |
-|---------|-------------|
-| A | Descripción del material o producto. |
-| B | Cantidad solicitada. |
-| C | Cantidad entregada. |
-| D | Cantidad pendiente (0 indica tarea completa). |
-| E | Orden de compra asociada al pedido. |
-| F | Nombre del proveedor. |
-| G | Número de factura (si aplica). |
-| H | Observaciones y estado de notificación (se marca "NOTIFICADO" tras el envío del correo). |
+Una ejecución real envía correo y modifica el estado de la hoja. Las comprobaciones deben hacerse primero con recursos de prueba.
 
-La fila superior puede incluir la etiqueta `"TAREA:"` y el número de la tarea para identificación rápida.
+## Integración con GestorCompras
 
----
+Este script detecta el hito de entrega completa y genera el aviso. [GestorCompras](https://github.com/eslay07/GestorCompras) puede usar la notificación como entrada para revisar y preparar la reasignación de tareas. Son proyectos complementarios, no la misma aplicación ni una dependencia que se instale automáticamente.
 
-## Instalación y configuración
+## Límites y mejoras pendientes
 
-### 1. Copiar el código en Google Apps Script
-1. Abrir la hoja de cálculo en Google Sheets.
-2. Ir a Extensiones > Apps Script.
-3. Pegar el contenido de `Tareas_finalizadas.gs` en el editor y guardar.
+- La estructura y los destinatarios deben configurarse para cada instalación.
+- La expresión actual `parseFloat(valor) || 0` interpreta datos vacíos o no numéricos como cero. Se debe validar la calidad de los datos; no equivale a una validación estricta de cantidades.
+- El marcado reduce reenvíos habituales, pero no incluye un bloqueo de concurrencia para ejecuciones simultáneas.
+- No hay una suite local de pruebas automatizadas en este repositorio. La lista anterior es un protocolo manual de verificación.
+- No se publica una medición de ahorro ni una garantía de entrega de correo; el resultado depende de los datos, permisos y cuotas de Google.
 
-### 2. Configurar el activador para la ejecución automática
-Para revisar la hoja de forma periódica, cree un activador basado en tiempo:
+## Código y documentación
 
-1. En Google Apps Script, abrir la pestaña **Desencadenadores**.
-2. Hacer clic en **Añadir desencadenador**.
-3. Configurar:
-   - Función: `verificarTareasCompletas`
-   - Evento: "Basado en tiempo"
-   - Frecuencia: "Cada 1 minuto" (ajustable según necesidad)
-4. Guardar.
+- [Código fuente](Tareas_finalizadas.gs): `verificarTareasCompletas` y `buscarTareaFila`.
+- [Evidencia y alcance del proyecto](PORTFOLIO.md).
+- [Manual integral existente](documentacion/Manual_Integral_Notificacion_Tareas.pdf).
+- [Procedencia del repositorio](PROVENIENCIA.md).
 
----
+## Autor
 
-## Personalización del sistema
+**Jimmy Toapanta** · [LinkedIn](https://www.linkedin.com/in/jimmy-toapanta-950a441b8/) · [Portafolio](https://github.com/eslay07)
 
-El script asigna destinatarios según el nombre de la hoja:
-
-| Nombre de la hoja | Correo destinatario |
-|-------------------|---------------------|
-| `"JT"` | `usuario@empresa.example` |
-| `"VP"` | `eslay777j@gmail.com` |
-
-Para agregar más responsables, amplíe el objeto `emailPorHoja` en el código y añada la hoja correspondiente.
-
----
-
-## Buenas prácticas y consideraciones
-
-- Evite copiar manualmente la palabra "NOTIFICADO" en nuevas tareas, para que el sistema pueda detectarlas.
-- No modifique las etiquetas `"PENDIENTE ENTREGA"` y `"DELIMITADOR"`, ya que delimitan el rango de datos a evaluar.
-- Revise los registros de ejecución en Apps Script si deja de recibir correos.
-
----
-
-## Beneficios del sistema
-
-- Automatiza el seguimiento de tareas sin depender de revisiones manuales.
-- Disminuye errores humanos en el control de pedidos.
-- Libera tiempo para actividades operativas de mayor prioridad.
-- Puede ajustarse a nuevas reglas o flujos de aprobación.
-
----
-
-## Licencia y uso del proyecto
-
-Este sistema fue desarrollado como un proyecto independiente para la automatización de notificaciones en Google Sheets.
-
-- Desarrollador original: Jimmy Toapanta
-- Estado del proyecto: versión experimental sin relación con implementaciones empresariales actuales
-
-Condiciones de uso:
-- El código se ofrece para exploración y pruebas en automatización.
-- No corresponde a implementaciones oficiales en ninguna empresa.
-- Su uso, modificación o distribución deben ser autorizados por el autor.
-
-Para consultas sobre la implementación del sistema, contactar al administrador de la hoja de cálculo.
+Consulte [LICENSE](LICENSE).
