@@ -1,5 +1,8 @@
 # Notificación automática de tareas en Google Sheets
 
+[Guía visual actual con capturas (PDF)](docs/portafolio/Guia_Visual_Actual.pdf) · [Procedencia y alcance de las muestras](docs/portafolio/README.md)
+
+
 **Automatización con Google Apps Script que detecta entregas completas y avisa por correo para continuar el seguimiento de la tarea.** Es un proyecto personal de Jimmy Toapanta orientado a reducir revisiones repetitivas de una hoja operativa.
 
 [Lectura de portafolio y evidencia](PORTFOLIO.md) · [GestorCompras](https://github.com/eslay07/GestorCompras) · [Perfil del autor](https://github.com/eslay07)
